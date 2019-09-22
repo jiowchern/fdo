@@ -1,0 +1,55 @@
+#include "stdafx.h"
+#include "Listener.h"
+
+UIListener::UIListener(const char* filter,int nsize)
+{
+	if(nsize)
+	{
+		mFilter.resize(nsize);
+		char* pBuf = &mFilter[0];
+		memcpy(pBuf,filter,sizeof(char) * nsize);
+	}
+	
+}
+//////////////////////////////////////////////////////////////////////////
+UIListener::~UIListener	()
+{
+
+}	
+//////////////////////////////////////////////////////////////////////////
+void UIListener::OnEvent(int nType,const wchar_t* text)
+{
+	
+}
+//////////////////////////////////////////////////////////////////////////
+void UIListener::Send(int nType,const wchar_t* fmt, ... )
+{
+	
+	if(mFilter.size() && mFilter[nType] == 1)
+	{
+		wchar_t buf[512];
+		va_list args;
+		va_start(args, fmt);		
+		vswprintf (buf, fmt, args);
+		va_end(args);
+
+		OnEvent(nType,buf);
+	}
+}
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+char gTypeFilter[UICreateListener::Count] = 
+{
+	1,1,1,1,1,1,1
+};
+//////////////////////////////////////////////////////////////////////////
+UICreateListener::UICreateListener() 
+: UIListener(gTypeFilter,Count)
+{
+
+}
+//////////////////////////////////////////////////////////////////////////
+UICreateListener::~UICreateListener()
+{
+
+}

@@ -1,0 +1,55 @@
+#include "stdafx.h"
+#include "UIBuilder.h"
+
+UIBuilder::UIBuilder()
+{
+
+}
+//////////////////////////////////////////////////////////////////////////
+UIBuilder::~UIBuilder()
+{
+
+}
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+const ITextDatabase* UIBuilder::gpTextDb = 0;
+////////////////////////////////////////////////////////////////////////////////////////////////////
+LabelTarget::LabelMap LabelTarget::labelMap =
+{
+	0,
+	&LabelTarget::vLabelParser[0]
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////
+LabelTarget::LabelParseEntry LabelTarget::vLabelParser[] =
+{
+	{ 0 , 0, 0 }
+};
+//////////////////////////////////////////////////////////////////////////
+bool LabelTarget::ReceiveStuff(int nClass,int nLabelID,const GUI::Element* pEle) 
+{
+	LabelMap* pMap = GetLabelMap();
+
+	
+	for (; pMap != 0 ; pMap = pMap->pBase)
+	{		
+		int idx = 0;
+		for ( ; pMap->pEntries[idx].pfn ; ++idx)
+		{
+			LabelParseEntry* pEntries = &pMap->pEntries[idx];
+			if(pEntries->nClass == nClass && pEntries->nLabel == nLabelID && pEntries->pfn != 0)
+			{
+				bool bPase = (this->*pEntries->pfn)(pEle);
+				if(bPase == false)
+					return false;
+				break;
+			}
+		}		
+	}
+	return false;		
+}
+//////////////////////////////////////////////////////////////////////////
+LabelTarget::LabelMap* LabelTarget::GetLabelMap() const 
+{ 
+	return &LabelTarget::labelMap; 
+} 
