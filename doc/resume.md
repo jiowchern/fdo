@@ -15,7 +15,11 @@
 
 **2012~2019**  
 主要開發語言 c# ，因為這段時間開始接觸 Unity 3.5 ，服務於幾家公司。  
-這段時間我開始思考如何於服務器與用戶端共寫一份代碼的技術，因此開發了基於 **Remote method invocation** 的網路框架 ([link](https://github.com/jiowchern/Regulus))。這個框架優勢在於可以將服務器上的物件以介面形式與用戶端溝通大大的模組化服務器與用戶端之前資料傳遞的代碼。服務器之間也可以透過此方法傳遞物件不用再撰寫冗長的轉發封包。其中為了相容於 Aot 的限制自己實作了類 protobuf 序列化模組 ([link](https://github.com/jiowchern/Regulus/tree/master/Library/Regulus.Serialization))，之後實作 rudp 為了優化 tcp 慢啟動的問題 ([link](https://github.com/jiowchern/Regulus/tree/master/Library/Regulus.Network))。與此同時也嘗試用此框架試作線上動作遊戲專案([link](https://github.com/jiowchern/GameProject1))，在這專案中也有實現[行為樹](https://github.com/jiowchern/Regulus/tree/master/Library/RegulusBehaviourTree)邏輯應用於怪物 ai。
+1. 這段時間我開始思考如何於服務器與用戶端共寫一份代碼的技術，因此開發了基於 **Remote Method Invocation** 的網路框架 ([link](https://github.com/jiowchern/Regulus))。這個框架優勢在於可以將服務器上的物件以介面形式傳遞給用戶端在溝通上大大的模組化服務器與用戶端之前資料傳遞的代碼。服務器之間也可以透過此方法傳遞物件不用再撰寫冗長的轉發封包。   
+P.S 關於API詳細介紹可以參照[舊版](https://sites.google.com/site/jiowchern/home)網頁。
+2. 其中為了相容於 Ahead-of-Time 的限制自己實作了類 protobuf 序列化模組 ([link](https://github.com/jiowchern/Regulus/tree/master/Library/Regulus.Serialization))  
+3. 之後實作 rudp 為了優化 tcp 慢啟動的問題 ([link](https://github.com/jiowchern/Regulus/tree/master/Library/Regulus.Network))。
+4. 與此同時也嘗試用此框架試作線上動作遊戲專案([link](https://github.com/jiowchern/GameProject1))，在這專案中也有實現[行為樹](https://github.com/jiowchern/Regulus/tree/master/Library/RegulusBehaviourTree)邏輯應用於怪物 ai。
 
 ### 關於現況
 雖然我也好幾年沒碰 C++ 當然也沒操作過 Unreal 對於程式語言我有自信能短時間更甚以往水平，至於遊戲引擎自己本身本來就對 Unreal 很有興趣往後日子也會開始自研，也希望公司能給我面試機會。
